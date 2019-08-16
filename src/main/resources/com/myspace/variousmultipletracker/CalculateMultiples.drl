@@ -1,0 +1,22 @@
+package com.myspace.variousmultipletracker;
+
+import java.lang.Number;
+import com.myspace.variousmultipletracker.TargetFirm;
+import com.myspace.variousmultipletracker.ComparableFirm;
+
+rule "CalculateMultiples"
+	dialect "mvel"
+	when
+		$cf : ComparableFirm( )
+		$tf : TargetFirm($cf.symbol == symbol )
+	then
+		ComparableFirmsMultiple cfm = new ComparableFirmsMultiple();
+		cfm.setSymbol($tf.getSymbol);
+		cfm.setMtb( $cf.getPrice / $cf.getBvps );
+		cfm.setPocf( $cf.getPrice / $cf.getOcps );
+		cfm.setPe( $cf.getPrice / $cf.getEps );
+    	cfm.setPrandd( $cf.getPrice  / $cf.getRdps );
+		cfm.setPs( $cf.getPrice / $cf.getRps );
+		insert( cfm );
+end
+

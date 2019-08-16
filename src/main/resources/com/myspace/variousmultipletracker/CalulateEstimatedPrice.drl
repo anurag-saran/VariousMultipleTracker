@@ -1,0 +1,24 @@
+package com.myspace.variousmultipletracker;
+
+import com.myspace.variousmultipletracker.ComparableFirmsMultiple;
+import com.myspace.variousmultipletracker.EstimatedPrice;
+import com.myspace.variousmultipletracker.TargetFirm;
+
+rule "CalculateEstimatedPrice"
+	dialect "mvel"
+	when
+		$cfm : ComparableFirmsMultiple( )
+		$tf : TargetFirm($cfm.symbol == symbol)
+	then
+		EstimatedPrice $ep = new EstimatedPrice();
+		$ep.setSymbol($tf.getSymbol );
+        $ep.setPe($cfm.getPe * $tf.getEps );
+        $ep.setMtb($cfm.getMtb * $tf.getBvps);
+        $ep.setPocf($cfm.getPocf * $tf.getOcps);
+        $ep.setPs($cfm.getPs * $tf.getRps );
+        $ep.setPrandd($cfm.getPrandd * $tf.getRandd );
+        $ep.setAverage($ep.getPe / 5);
+		insert( $ep );
+end
+
+

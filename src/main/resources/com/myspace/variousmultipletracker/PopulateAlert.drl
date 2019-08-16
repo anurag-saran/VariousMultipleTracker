@@ -1,0 +1,15 @@
+package com.myspace.variousmultipletracker
+
+import com.myspace.variousmultipletracker.Alert
+import com.myspace.variousmultipletracker.EstimatedPrice
+
+rule "PopulateAlert"
+	dialect "mvel"
+	when
+	     //$ep : EstimatedPrice( )
+	     $total : Number() from accumulate(
+         EstimatedPrice( $a : average ),
+         sum( $a ) )
+	then
+		System.out.println("fired rule " + kcontext.getRule().getName()+ $total);
+end

@@ -1,0 +1,6 @@
+<kmodule xmlns="http://www.drools.org/xsd/kmodule" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <kbase name="variousmultipletracker-kie-base" default="true" eventProcessingMode="cloud" equalsBehavior="equality">
+    <ksession name="variousmultipletracker-stateful-kie-session" type="stateful" default="false" clockType="realtime"/>
+    <ksession name="variousmultipletracker-kie-session" type="stateless" default="true" clockType="realtime"/>
+  </kbase>
+</kmodule>
